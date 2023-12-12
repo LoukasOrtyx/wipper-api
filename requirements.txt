@@ -4,3 +4,4 @@ pathlib
 httpx
 face_recognition
 pytest
+opencv-python
