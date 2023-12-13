@@ -2,6 +2,6 @@ fastapi
 uvicorn
 pathlib
 httpx
-face_recognition
-pytest
 opencv-python
+face-recognition
+pytest
