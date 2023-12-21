@@ -3,5 +3,8 @@ uvicorn
 pathlib
 httpx
 opencv-python
-face-recognition
+face_recognition
 pytest
+scipy
+scikit-image
+torchvision

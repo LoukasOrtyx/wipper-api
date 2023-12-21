@@ -1,6 +1,7 @@
-FROM wipper-base:0.0.1
+FROM wipper-base-inpainting:0.0.1
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
 EXPOSE 8000
-ENTRYPOINT [ "python", "main.py" ]
+ENV PYTHONPATH "${PYTHONPATH}."
+ENTRYPOINT [ "python3", "main.py" ]
