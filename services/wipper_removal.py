@@ -6,7 +6,6 @@ import gradio as gr
 from PIL import Image
 from scipy.ndimage import binary_dilation
 from diffusers import StableDiffusionInpaintPipeline
-from services.wipper_recognition import *
 
 def init_inpaint_pipe():
 	device = "cuda"
@@ -44,17 +43,3 @@ def overlay_empty_background(original_image, mask, inpainted_image, iterations=1
   original_image[mask > 0] = 0
   inpainted_image[mask < 255] = 0
   return original_image + inpainted_image
-
-def remove_isolated_mask_pixels(mask):
-  gray = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-  result = cv2.pyrDown(gray)
-  _, threshed = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)
-  contours,_ = cv2.findContours(threshed, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-  cmax = max(contours, key = cv2.contourArea)
-  epsilon = 0.009 * cv2.arcLength(cmax, True)
-  approx = cv2.approxPolyDP(cmax, epsilon, True)
-  cv2.drawContours(mask, [approx], -1, (0, 255, 0), 3)
-  width, height = gray.shape
-  result = np.zeros([width, height],dtype=np.uint8)
-  cv2.fillPoly(result, pts =[cmax], color=(255,255))
-  return result

@@ -7,4 +7,3 @@ face_recognition
 pytest
 scipy
 scikit-image
-torchvision

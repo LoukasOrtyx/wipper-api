@@ -4,7 +4,7 @@ import face_recognition
 
 from typing import List
 
-def generate_face_coordinates(target_img: np.ndarray, unknown_img: np.ndarray):
+def generate_face_coordinates(target_img: np.ndarray, unknown_img: np.ndarray, extra_non_target_pts=[]):
 	target_face = face_recognition.face_encodings(target_img, model='small')[0]
 	face_locations = face_recognition.face_locations(unknown_img)
 	face_encodings = face_recognition.face_encodings(unknown_img, face_locations, model='small')
@@ -24,6 +24,9 @@ def generate_face_coordinates(target_img: np.ndarray, unknown_img: np.ndarray):
 		x = (left + right) // 2
 		y = (top + bottom) // 2
 		coordinates.append((x, y))
+	if extra_non_target_pts:
+		coordinates.extend(extra_non_target_pts)
+	
 	coordinates = np.array([target_center_coordinate, *coordinates])
 	return coordinates
 	
