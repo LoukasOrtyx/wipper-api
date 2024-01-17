@@ -1,10 +1,11 @@
 from typing import List
 from pydantic import BaseModel, Field
+from models.wipper_image import WipperImage
 
 class RecognitionRequest(BaseModel):
-    target: str = Field(
+    target: WipperImage = Field(
         ..., title='Target Image', 
-        description='Base64 encoded image string of the person to be wiped out.')
-    batch: List[str] = Field(
+        description='WipperImage instance of the person to be wiped out.')
+    batch: List[WipperImage] = Field(
         ..., title='Image Batch', 
-        description='Base64 encoded image string batch to be processed based of the target image.')
+        description='List of WipperImage containing the image batch to be processed.')

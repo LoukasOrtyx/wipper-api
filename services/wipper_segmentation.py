@@ -1,14 +1,14 @@
-import sys
-import cv2
-import numpy as np
+# import sys
+# import cv2
+# import numpy as np
 
-from copy import deepcopy
-from scipy import ndimage
-from skimage import morphology, exposure
-from scipy.ndimage import binary_dilation
+# from copy import deepcopy
+# from scipy import ndimage
+# from skimage import morphology, exposure
+# from scipy.ndimage import binary_dilation
 
-sys.path.append("..")
-from segment_anything import sam_model_registry, SamPredictor
+# sys.path.append("..")
+# from segment_anything import sam_model_registry, SamPredictor
 
 def init_sam():
 	sam_checkpoint = "../weights/sam_vit_h_4b8939.pth"

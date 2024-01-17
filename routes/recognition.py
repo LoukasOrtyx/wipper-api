@@ -15,7 +15,9 @@ router = APIRouter(
     status.HTTP_400_BAD_REQUEST: {'model': WipperException}
 })
 def search_for_face(wippper_request: RecognitionRequest) -> RecognitionResponse:
-    target, batch = decode_base64(wippper_request.target), decode_base64_list(wippper_request.batch)
+    target = wippper_request.target.data
+    batch = [wipper_img.data for wipper_img in wippper_request.batch]
+    target, batch = decode_base64(target), decode_base64_list(batch)
     try:
         idx_list = get_idxs_containing_face(target, batch)
     except IndexError:
@@ -23,4 +25,5 @@ def search_for_face(wippper_request: RecognitionRequest) -> RecognitionResponse:
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Could not find face in target image."
         )
-    return RecognitionResponse(indexes=idx_list)
+    fnames = [wippper_request.batch[i].fname for i in idx_list]
+    return RecognitionResponse(fnames=fnames)

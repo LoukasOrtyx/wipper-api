@@ -1,11 +1,11 @@
-import cv2
-import torch
-import numpy as np
-import gradio as gr
+# import cv2
+# import torch
+# import numpy as np
+# import gradio as gr
 
-from PIL import Image
-from scipy.ndimage import binary_dilation
-from diffusers import StableDiffusionInpaintPipeline
+# from PIL import Image
+# from scipy.ndimage import binary_dilation
+# from diffusers import StableDiffusionInpaintPipeline
 
 def init_inpaint_pipe():
 	device = "cuda"
